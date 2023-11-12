@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div>
+        <h1 style="color: black;">Wishlisted Items</h1>
+    </div>
+    <div id="wishlist-container">
+       
+        <h1>Wishlisted Items</h1>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const mealID = urlParams.get('mealID');
+        const mealName = urlParams.get('mealName');
+        fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
+        .then(response => response.json())
+        .then(data => {
+            const meal = data.meals[0];
+            console.log(data);
+            displayMealDetails(meal);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+        function displayMealDetails(meal) {
+            const wishlistDetailsContainer = document.getElementById('wishlist-container');
+             wishlistDetailsContainer.innerHTML = `
+             <div class="wishlist-meal">
+                <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                <div class="second-div">
+                    <h1>${meal.strMeal}</h1>
+                    <button class="unlike"onclick="unlikeMeal()">UnLike</button>
+                </div>
+            </div>
+        `; 
+        }
+        function unlikeMeal() {
+            const wishlistContainer = document.getElementById('wishlist-container');
+            wishlistContainer.innerHTML = ''; // Clear the container to remove the meal
+        
+    }
+        // function displayWishlistedMeal(meal) {
+        //     const wishlistContainer = document.getElementById('wishlist-container');
+        //     const wishlistItem = document.createElement('div');
+        //     wishlistItem.classList.add('wishlist-meal');
+
+        //     wishlistItem.innerHTML = `
+        //         <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+        //         <div>
+        //             <h1>${meal.strMeal}</h1>
+        //             <button id="unlikeButton">Unlike</button>
+        //         </div>
+        //     `;
+
+            // wishlistContainer.appendChild(wishlistItem);
+            // const unlikeButton = document.getElementById('unlikeButton');
+            // unlikeButton.addEventListener('click', () => {
+              
+            //     alert('Unlike functionality to be implemented.');
+            // });
+        // }
+   
+    </script>
+    
+</body>
+</html>

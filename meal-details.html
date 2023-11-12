@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="meal-details-container">
+        <!-- Display meal details here using JavaScript -->
+    </div>
+    <!-- <h2>Ingredients</h2> -->
+<ul id="ingredients-list">
+    <!-- Ingredients will be displayed here -->
+</ul>
+
+   <!-- meal-details.html -->
+<!-- ...other HTML code... -->
+
+<script>
+    // Get the meal ID from the query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const mealID = urlParams.get('mealID');
+
+    // Fetch and display meal details based on the mealID
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
+        .then(response => response.json())
+        .then(data => {
+            const meal = data.meals[0];
+            console.log(data);
+            displayMealDetails(meal);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    function displayMealDetails(meal) {
+        // Display meal details on the page
+        const mealDetailsContainer = document.getElementById('meal-details-container');
+        mealDetailsContainer.innerHTML = `
+        <div class="single-meal">
+            <h1>${meal.strMeal}</h1>
+            <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+            <p>${meal.strInstructions}</p>
+            <h2>Ingredients</h2>
+            <ul id="ingredients-list">
+                ${generateIngredientsList(meal)}
+            </ul>
+            <!-- Add more meal details as needed -->
+        </div>
+        `; 
+    }
+
+    function generateIngredientsList(meal) {
+        const ingredientsList = [];
+        for (let i = 1; i <= 20; i++) {
+            const ingredient = meal[`strIngredient${i}`];
+            const measurement = meal[`strMeasure${i}`];
+
+            if (ingredient && measurement) {
+                ingredientsList.push(`<li>${measurement} ${ingredient}</li>`);
+            } else {
+                break;
+            }
+        }
+        return ingredientsList.join('');
+    }
+</script>
+
+
+</body>
+</html>

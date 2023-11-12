@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a6c7bb18fe.js" crossorigin="anonymous"></script>
+
+    
+</head>
+<body>
+    <div class="container">
+        <div class="content_list">
+            <ul class="list">
+                <li>
+                    <a href="https://www.google.com">Home</a>
+                </li>
+                <li>
+                    <a href="#wishlisted" class="liked" id="wishlist-liked"> Liked</a>
+                </li>
+                <li>
+                    <a href="#login/signup"> Login/Sign Up</a>
+                </li>
+            </ul>
+        </div>	
+    
+            <h1 class="apptitle">Meal Search</h1>
+            <h3 class="description">Discover the best foods in the city!</h3>
+            <div class="flex">
+                <form  class="flex" id="submit">
+                    <input type="text" id="search" placeholder="Search for cuisine or a dish" autocomplete="off">
+                    <button class="search-btn" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>    
+            <div class="result-header">
+
+            </div>
+    </div>
+    
+    <div id="meal" class="meals-result">
+
+    </div>
+    <div id="detailed-result">
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
